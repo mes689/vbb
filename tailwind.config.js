@@ -12,6 +12,12 @@ export default {
         'spin-reverse': 'spin 6s linear infinite reverse',
         'pulse-slow': 'pulse 3s ease-in-out infinite',
         'orbit': 'orbit 4s linear infinite',
+        'fadeInUp': 'fadeInUp 0.6s ease-out forwards',
+        'fadeInLeft': 'fadeInLeft 0.6s ease-out forwards',
+        'fadeInRight': 'fadeInRight 0.6s ease-out forwards',
+        'fadeIn': 'fadeIn 0.6s ease-out forwards',
+        'scaleIn': 'scaleIn 0.6s ease-out forwards',
+        'slideInUp': 'slideInUp 0.6s ease-out forwards',
       },
       keyframes: {
         gradient: {
@@ -40,9 +46,72 @@ export default {
             top: '50%'
           },
         },
+        fadeInUp: {
+          '0%': {
+            opacity: '0',
+            transform: 'translateY(30px)'
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translateY(0)'
+          },
+        },
+        fadeInLeft: {
+          '0%': {
+            opacity: '0',
+            transform: 'translateX(-30px)'
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translateX(0)'
+          },
+        },
+        fadeInRight: {
+          '0%': {
+            opacity: '0',
+            transform: 'translateX(30px)'
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translateX(0)'
+          },
+        },
+        fadeIn: {
+          '0%': {
+            opacity: '0'
+          },
+          '100%': {
+            opacity: '1'
+          },
+        },
+        scaleIn: {
+          '0%': {
+            opacity: '0',
+            transform: 'scale(0.9)'
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'scale(1)'
+          },
+        },
+        slideInUp: {
+          '0%': {
+            opacity: '0',
+            transform: 'translateY(50px)'
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translateY(0)'
+          },
+        },
       },
       fontFamily: {
         'arabic': ['Tajawal', 'sans-serif'],
+      },
+      transitionDuration: {
+        '600': '600ms',
+        '800': '800ms',
+        '1000': '1000ms',
       },
     },
   },

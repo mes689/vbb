@@ -30,7 +30,12 @@ interface AuthContextType {
   user: User | null;
   token: string | null;
   login: (email: string, password: string) => Promise<boolean>;
-  signup: (email: string, password: string, name: string) => Promise<boolean>;
+  signup: (email: string, password: string, name: string, additionalInfo?: {
+    dateOfBirth?: string;
+    location?: string;
+    phone?: string;
+    bio?: string;
+  }) => Promise<boolean>;
   logout: () => void;
   updateProfile: (updates: { name?: string; bio?: string; dateOfBirth?: string }) => Promise<boolean>;
   loading: boolean;
@@ -199,7 +204,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const signup = async (email: string, password: string, name: string): Promise<boolean> => {
+  const signup = async (email: string, password: string, name: string, additionalInfo?: {
+    dateOfBirth?: string;
+    location?: string;
+    phone?: string;
+    bio?: string;
+  }): Promise<boolean> => {
     try {
       setLoading(true);
 
@@ -210,7 +220,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ name, email, password }),
+          body: JSON.stringify({ 
+            name, 
+            email, 
+            password,
+            ...additionalInfo
+          }),
         });
 
         const data = await response.json();
@@ -244,6 +259,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         email,
         password,
         role: 'user',
+        bio: additionalInfo?.bio || '',
+        dateOfBirth: additionalInfo?.dateOfBirth,
+        location: additionalInfo?.location,
+        phone: additionalInfo?.phone,
         isActive: true,
         isEmailVerified: true,
         loginCount: 1,

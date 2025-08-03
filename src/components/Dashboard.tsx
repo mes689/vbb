@@ -14,6 +14,11 @@ interface LocalUser {
   isActive: boolean;
   createdAt: string;
   loginCount: number;
+  dateOfBirth?: string;
+  location?: string;
+  phone?: string;
+  bio?: string;
+  age?: number;
 }
 
 export default function Dashboard({ onClose }: DashboardProps) {
@@ -443,6 +448,11 @@ export default function Dashboard({ onClose }: DashboardProps) {
                                     <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 truncate">
                                       {userData.email}
                                     </p>
+                                    {userData.location && (
+                                      <p className="text-xs text-gray-400 dark:text-gray-500 truncate">
+                                        📍 {userData.location}
+                                      </p>
+                                    )}
                                   </div>
                                 </div>
                               </td>
@@ -468,6 +478,26 @@ export default function Dashboard({ onClose }: DashboardProps) {
                                 <div className="flex items-center space-x-2">
                                   {userData.id !== 'owner_id' && (
                                     <>
+                                      <button
+                                        onClick={() => {
+                                          const userInfo = `
+Name: ${userData.name}
+Email: ${userData.email}
+Role: ${userData.role}
+Location: ${userData.location || 'Not specified'}
+Phone: ${userData.phone || 'Not specified'}
+Bio: ${userData.bio || 'Not specified'}
+Age: ${userData.age || 'Not specified'}
+Created: ${new Date(userData.createdAt).toLocaleDateString()}
+Login Count: ${userData.loginCount}
+                                          `.trim();
+                                          alert(userInfo);
+                                        }}
+                                        className="p-1 sm:p-2 text-green-600 hover:bg-green-100 dark:hover:bg-green-900 rounded-lg transition-colors"
+                                        title="View User Info"
+                                      >
+                                        <Eye className="w-4 h-4" />
+                                      </button>
                                       <button
                                         onClick={() => handleUserRoleChange(userData.id, userData.role === 'user' ? 'owner' : 'user')}
                                         className="p-1 sm:p-2 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900 rounded-lg transition-colors"
